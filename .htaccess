@@ -1,0 +1,11 @@
+ErrorDocument 404 /SRAUNN2017/index.php
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /SRAUNN2017/index.php/$1 [L,QSA]
+
+</IfModule>

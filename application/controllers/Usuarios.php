@@ -7,7 +7,19 @@ class Usuarios extends CI_Controller {
         parent::__construct();
         $this->load->model('m_usuarios');
     }
-
+    
+    function Principal(){
+        if($this->session->userdata('sesion_activa')){
+            $Datos['Titulo'] = 'Sistema de Registro Académico';
+            $Datos['Contenido'] = 'frmPrincipal';
+            $Datos['Plantilla'] = 'plantillas/v_inicio';
+            $this->load->view('estructura/estructura', $Datos);
+        }
+        else{
+            redirect(base_url());
+        } 
+    }
+    
     function acceder(){
         $this->form_validation->set_rules('Usuario', 'Usuario', 'required|trim|alpha_numeric');
         $this->form_validation->set_rules('Clave', 'Clave', 'required|trim|MD5');
@@ -20,21 +32,27 @@ class Usuarios extends CI_Controller {
                 $Cookie = array();
                 foreach ($Info as $row){
                     $Cookie = array(
-                    'usuario'   => $row->usuario,
-                    'Activo'    => $row->activo,
-                    'Foto'      => $row->foto,
-                    'Usuario_id'        => $row->usuario_id,
-                    'username'  => $row->usuario,
-                    'Usuario_t' => $row->usuario_t);
-                    $this->session->set_userdata('sesion_activa');
+                        'Usuario'       => $row->usuario,
+                        'Activo'        => $row->activo,
+                        'Foto'          => $row->foto,
+                        'Usuario_id'    => $row->usuario_id,
+                        'username'      => $row->usuario,
+                        'Usuario_t'     => $row->usuario_t
+                    );
+                    $this->session->set_userdata('sesion_activa', $Cookie);
                 }
-                $this->load->view('frmPrincipal');
+                redirect('Usuarios/Principal');
             }           
         }
         else
         {
             redirect(base_url());
         }
+    }
+    
+    function salir(){
+        $this->session->sess_destroy();
+        redirect(base_url());
     }
 }
 

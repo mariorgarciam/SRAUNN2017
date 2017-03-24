@@ -5,4 +5,3 @@ echo '<br>';
 echo $Sesion['Usuario'];
 echo '<br>';
 echo $Sesion['Foto'];
-
