@@ -7,6 +7,12 @@ and open the template in the editor.
     Created on : 11-mar-2017, 16:51:29
     Author     : Binary Lemon
 */
+        body{
+            background: url('../img/somoto.jpg') fixed;
+            background-size: cover;
+            z-index: -50;
+            background-repeat: no-repeat;
+        }
 .form-signin
 {
     max-width: 330px;
